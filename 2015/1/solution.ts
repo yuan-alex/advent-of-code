@@ -1,8 +1,7 @@
-
 import fs from "fs";
 import path from "path";
 
-const data = fs.readFileSync(path.join("./input/input.txt"), "utf8").split("");
+const data = fs.readFileSync(path.join("./input.txt"), "utf8").split("");
 
 let counter = 0;
 data.forEach((i) => {
