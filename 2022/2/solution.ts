@@ -6,13 +6,13 @@ const data = fs.readFileSync(path.resolve(__dirname, "./input.txt"), "utf8");
 enum Play {
   Rock = 1,
   Paper = 2,
-  Scissors = 3
+  Scissors = 3,
 }
 
 enum RoundResult {
   Draw = 3,
   Player1 = 0,
-  Player2 = 6
+  Player2 = 6,
 }
 
 function getRoundResult(a, b) {
@@ -26,7 +26,7 @@ function getRoundResult(a, b) {
       } else {
         return RoundResult.Player2;
       }
-    };
+    }
     case Play.Paper: {
       if (b == Play.Rock) {
         return RoundResult.Player1;
@@ -62,13 +62,16 @@ function convertCharToPlay(char: string): Play {
 }
 
 export function part1(input: string) {
-  return input.split("\r\n").map((line) => {
-    const [a, b] = line.split(" ");
-    const play1 = convertCharToPlay(a);
-    const play2 = convertCharToPlay(b);
-    const result = getRoundResult(play1, play2);
-    return result + play2;
-  }).reduce((a, b) => a + b);
+  return input
+    .split("\r\n")
+    .map((line) => {
+      const [a, b] = line.split(" ");
+      const play1 = convertCharToPlay(a);
+      const play2 = convertCharToPlay(b);
+      const result = getRoundResult(play1, play2);
+      return result + play2;
+    })
+    .reduce((a, b) => a + b);
 }
 
 console.log(part1(data));
@@ -96,22 +99,25 @@ function findLosingPlay(a: Play): Play {
 }
 
 export function part2(input: string) {
-  return input.split("\r\n").map((line) => {
-    const [a, b] = line.split(" ");
-    const play1 = convertCharToPlay(a);
+  return input
+    .split("\r\n")
+    .map((line) => {
+      const [a, b] = line.split(" ");
+      const play1 = convertCharToPlay(a);
 
-    let play2: Play;
-    if (b == "X") {
-      play2 = findLosingPlay(play1);
-    } else if (b == "Y") {
-      play2 = play1
-    } else if (b == "Z") {
-      play2 = findWinningPlay(play1);
-    }
+      let play2: Play;
+      if (b == "X") {
+        play2 = findLosingPlay(play1);
+      } else if (b == "Y") {
+        play2 = play1;
+      } else if (b == "Z") {
+        play2 = findWinningPlay(play1);
+      }
 
-    const result = getRoundResult(play1, play2);
-    return result + play2;
-  }).reduce((a, b) => a + b);
+      const result = getRoundResult(play1, play2);
+      return result + play2;
+    })
+    .reduce((a, b) => a + b);
 }
 
 console.log(part2(data));
