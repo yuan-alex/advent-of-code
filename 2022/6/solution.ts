@@ -25,3 +25,13 @@ const part1 = (data: string) => {
 };
 
 console.log(part1(data));
+
+const part2 = (data: string) => {
+  for (let i = 14; i <= data.length; i++) {
+    if (isUnique(data.slice(i - 14, i))) {
+      return i;
+    }
+  }
+};
+
+console.log(part2(data));
