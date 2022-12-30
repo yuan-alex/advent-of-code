@@ -38,6 +38,11 @@ class CrateStore {
       this.store[to].push(selected);
     }
   };
+
+  move2 = (quantity: Number, from: string, to: string) => {
+    const selected = this.store[from].splice(-quantity);
+    this.store[to].push(...selected);
+  };
 }
 
 const part1 = (lines: string[]) => {
@@ -50,3 +55,14 @@ const part1 = (lines: string[]) => {
 };
 
 console.log(part1(lines));
+
+const part2 = (lines: string[]) => {
+  const store = new CrateStore(lines);
+  lines.slice(store.size() + 1).forEach((instruction) => {
+    const temp = instruction.split(" ");
+    store.move2(parseInt(temp[1]), temp[3], temp[5]);
+  });
+  return store.getTopBoxes().join("");
+};
+
+console.log(part2(lines));
