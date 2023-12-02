@@ -11,7 +11,7 @@
   "keywords": [],
   "author": "Alex Yuan",
   "devDependencies": {
-    "@types/node": "^18.11.18",
-    "prettier": "^2.8.1"
+    "@types/node": "^20.10.2",
+    "prettier": "^3.1.0"
   }
 }
